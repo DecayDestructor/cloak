@@ -16,7 +16,7 @@ import { useRef } from 'react'
 
 const Navbar = ({ darkMode }) => {
   const sideBarRef = useRef(null)
-  console.log(sideBarRef)
+
   return (
     <nav className="flex justify-between items-center px-5 py-2 bg-gray-100 dark:bg-black dark:text-white text-black transition-all duration-500 ease-out font-poppins">
       <img
@@ -101,7 +101,6 @@ const Navbar = ({ darkMode }) => {
               color={`${darkMode ? 'black' : 'white'}`}
               onClick={() => {
                 sideBarRef.current.style.transform = 'translateX(0)'
-                console.log('click')
               }}
             />
           </IconButton>
