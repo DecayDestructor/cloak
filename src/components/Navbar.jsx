@@ -18,34 +18,38 @@ const Navbar = ({ darkMode }) => {
   const [showFullWidthSearch, setShowFullWidthSearch] = useState(false)
   return (
     <nav
-      className={`flex fixed top-0 w-full justify-between items-center px-5 py-2 bg-gray-100 dark:bg-black dark:text-white text-black transition-all duration-500 ease-out font-poppins`}
+      className={`flex  w-full justify-between items-center px-5 py-2 bg-gray-100 dark:bg-black dark:text-white text-black transition-all duration-500 ease-out font-poppins`}
     >
       <img
         src={darkMode ? logoDark : logoLight}
         alt="logo-pic"
         className={`h-[50px] w-[50px] ${showFullWidthSearch && 'hidden'}`}
       />
-      <span className={`md:hidden ${!showFullWidthSearch && 'hidden'}`}>
-        <IconButton
-          onClick={() => {
-            setShowFullWidthSearch(false)
-          }}
-        >
-          <ArrowLeftIcon color={`${darkMode ? 'black' : 'white'}`} />
-        </IconButton>
-      </span>
+
       <div
-        className={`rounded-md p-2 flex items-center justify-center gap-2 bg-transparent ${
+        className={`rounded-md p-2 flex items-center justify-between gap-2 bg-transparent ${
           !showFullWidthSearch && 'hidden'
         }`}
       >
-        <form className="flex items-center bg-transparent gap-3 justify-center ">
+        <span className={`md:hidden ${!showFullWidthSearch && 'hidden'}`}>
+          <IconButton
+            onClick={() => {
+              setShowFullWidthSearch(false)
+            }}
+          >
+            <ArrowLeftIcon
+              color={`${darkMode ? 'black' : 'white'}`}
+              size={18}
+            />
+          </IconButton>
+        </span>
+        <form className="flex items-center bg-transparent gap-3 justify-center">
           <input
-            className={`outline-none px-3 bg-transparent dark:placeholder-white placeholder-black`}
+            className={`outline-none px-3 bg-transparent dark:placeholder-white placeholder-black text-sm`}
             placeholder="Search for clothing"
           />
           <button type="submit" onClick={(e) => e.preventDefault()}>
-            <Search />
+            <Search size={18} />
           </button>
         </form>
       </div>
@@ -102,34 +106,42 @@ const Navbar = ({ darkMode }) => {
             <Search color={`${darkMode ? 'black' : 'white'} `} />
           </IconButton>
         </span>
-
-        <Tooltip title="Profile">
-          <a href="">
-            <IconButton>
-              <User radius={'100%'} color={`${darkMode ? 'black' : 'white'}`} />
-            </IconButton>
-          </a>
-        </Tooltip>
-        <Tooltip title="Wishlist">
-          <a href="">
-            <IconButton>
-              <Heart
-                radius={'100%'}
-                color={`${darkMode ? 'black' : 'white'}`}
-              />
-            </IconButton>
-          </a>
-        </Tooltip>
-        <Tooltip title="Cart">
-          <a href="">
-            <IconButton>
-              <LucideShoppingBag
-                radius={'100%'}
-                color={`${darkMode ? 'black' : 'white'}`}
-              />
-            </IconButton>
-          </a>
-        </Tooltip>
+        <span className={`md:hidden ${showFullWidthSearch && 'hidden'} `}>
+          <Tooltip title="Profile">
+            <a href="">
+              <IconButton>
+                <User
+                  radius={'100%'}
+                  color={`${darkMode ? 'black' : 'white'}`}
+                />
+              </IconButton>
+            </a>
+          </Tooltip>
+        </span>
+        <span className={`md:hidden ${showFullWidthSearch && 'hidden'} `}>
+          <Tooltip title="Wishlist">
+            <a href="">
+              <IconButton>
+                <Heart
+                  radius={'100%'}
+                  color={`${darkMode ? 'black' : 'white'}`}
+                />
+              </IconButton>
+            </a>
+          </Tooltip>
+        </span>
+        <span className={`md:hidden ${showFullWidthSearch && 'hidden'} `}>
+          <Tooltip title="Cart">
+            <a href="">
+              <IconButton>
+                <LucideShoppingBag
+                  radius={'100%'}
+                  color={`${darkMode ? 'black' : 'white'}`}
+                />
+              </IconButton>
+            </a>
+          </Tooltip>
+        </span>
         <span className="md:hidden">
           <IconButton
             className="md:hidden"
