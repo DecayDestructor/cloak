@@ -5,11 +5,12 @@ const App = () => {
   const [darkMode, setDarkMode] = useState(false)
 
   return (
-    <div className={`${darkMode && 'dark'}`}>
+    <div >
       <button
         className="rounded-full bg-black p-3 absolute bottom-5 right-5 "
         onClick={() => {
           setDarkMode(!darkMode)
+          document.documentElement.classList.toggle('dark')
         }}
       >
         {darkMode ? <Sun color="white" /> : <Moon color="white" />}

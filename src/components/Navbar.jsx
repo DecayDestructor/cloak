@@ -14,8 +14,8 @@ import { IconButton, Tooltip } from '@mui/material'
 
 const Navbar = ({ darkMode }) => {
   return (
-    <div className={`${darkMode && 'dark'}`}>
-      <nav className="flex justify-between items-center px-5 py-5 bg-gray-100 dark:bg-black dark:text-white text-black transition-colors duration-700 ease-out">
+    <div>
+      <nav className="flex justify-between items-center px-5 py-5 bg-gray-100 dark:bg-slate-500 dark:text-white text-black ">
         <img
           src={darkMode ? logoLight : logoDark}
           alt="logo-pic"
@@ -43,7 +43,6 @@ const Navbar = ({ darkMode }) => {
           <Tooltip title="Profile">
             <a href="">
               <IconButton
-                style={darkMode ? { color: 'white' } : { color: 'black' }}
               >
                 <User radius={'100%'} />
               </IconButton>
@@ -52,7 +51,6 @@ const Navbar = ({ darkMode }) => {
           <Tooltip title="Wishlist">
             <a href="">
               <IconButton
-                style={darkMode ? { color: 'white' } : { color: 'black' }}
               >
                 <Heart radius={'100%'} />
               </IconButton>
@@ -61,7 +59,6 @@ const Navbar = ({ darkMode }) => {
           <Tooltip title="Cart">
             <a href="">
               <IconButton
-                style={darkMode ? { color: 'white' } : { color: 'black' }}
               >
                 <LucideShoppingBag radius={'100%'} />
               </IconButton>
