@@ -6,10 +6,9 @@ const App = () => {
   const [darkMode, setDarkMode] = useState(false)
 
   return (
-    <div className="min-h-full">
-      <Navbar darkMode={darkMode} />
+    <div className="min-h-full relative">
       <button
-        className="rounded-full bg-black p-3 sticky bottom-5 right-5 "
+        className="rounded-full bg-black p-3 fixed bottom-5 right-5 "
         onClick={() => {
           setDarkMode(!darkMode)
           document.documentElement.classList.toggle('dark')
@@ -17,6 +16,8 @@ const App = () => {
       >
         {darkMode ? <Sun color="white" /> : <Moon color="white" />}
       </button>
+      <Navbar darkMode={darkMode} />
+
       <Home darkMode={darkMode} setDarkMode={setDarkMode} />
     </div>
   )

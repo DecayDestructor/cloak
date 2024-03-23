@@ -1,5 +1,4 @@
 // Home.jsx
-import Navbar from '../components/Navbar'
 import Carousel from '../sections/Carousel'
 import Featured from '../sections/Featured'
 import MensTrending from '../sections/MenTrending'
@@ -7,9 +6,9 @@ import WomenTrending from '../sections/WomenTrending'
 import Essentials from '../sections/Essentials'
 import Footer from '../sections/Footer'
 
-const Home = ({ darkMode, setDarkMode }) => {
+const Home = () => {
   return (
-    <div>
+    <div className="mt-16">
       <Carousel />
       <Featured />
       <MensTrending />

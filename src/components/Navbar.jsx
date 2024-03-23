@@ -3,52 +3,53 @@ import { navbarData } from '../data/navbar'
 import logoDark from '../assets/logo-dark.png'
 import logoLight from '../assets/logo-light.png'
 import {
+  ArrowLeftIcon,
   Heart,
   LucideShoppingBag,
   MenuIcon,
-  Moon,
   Search,
-  ShoppingBag,
   User,
 } from 'lucide-react'
-import { IconButton, Menu, Tooltip } from '@mui/material'
-import { useRef, useState, useEffect } from 'react'
+import { IconButton, Tooltip } from '@mui/material'
+import { useRef, useState } from 'react'
 
 const Navbar = ({ darkMode }) => {
-  const [prevScrollPos, setPrevScrollPos] = useState(0)
-  const [visible, setVisible] = useState(true)
-
-  const handleScroll = () => {
-    const currentScrollPos = window.scrollY
-
-    if (currentScrollPos > prevScrollPos) {
-      setVisible(false)
-    } else {
-      setVisible(true)
-    }
-
-    setPrevScrollPos(currentScrollPos)
-  }
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-
-    return () => window.removeEventListener('scroll', handleScroll)
-  })
-
   const sideBarRef = useRef(null)
-  const [showFullWidthSearch, setShowFullWidthSearch] = useState('false')
+  const [showFullWidthSearch, setShowFullWidthSearch] = useState(false)
   return (
     <nav
-      className={`flex sticky top-0 justify-between items-center px-5 py-2 bg-gray-100 dark:bg-black dark:text-white text-black transition-all duration-500 ease-out font-poppins ${
-        !visible && 'hidden'
-      }`}
+      className={`flex fixed top-0 w-full justify-between items-center px-5 py-2 bg-gray-100 dark:bg-black dark:text-white text-black transition-all duration-500 ease-out font-poppins`}
     >
       <img
         src={darkMode ? logoDark : logoLight}
         alt="logo-pic"
-        className="h-[50px] w-[50px]"
+        className={`h-[50px] w-[50px] ${showFullWidthSearch && 'hidden'}`}
       />
+      <span className={`md:hidden ${!showFullWidthSearch && 'hidden'}`}>
+        <IconButton
+          onClick={() => {
+            setShowFullWidthSearch(false)
+          }}
+        >
+          <ArrowLeftIcon color={`${darkMode ? 'black' : 'white'}`} />
+        </IconButton>
+      </span>
+      <div
+        className={`rounded-md p-2 flex items-center justify-center gap-2 bg-transparent ${
+          !showFullWidthSearch && 'hidden'
+        }`}
+      >
+        <form className="flex items-center bg-transparent gap-3 justify-center ">
+          <input
+            className={`outline-none px-3 bg-transparent dark:placeholder-white placeholder-black`}
+            placeholder="Search for clothing"
+          />
+          <button type="submit" onClick={(e) => e.preventDefault()}>
+            <Search />
+          </button>
+        </form>
+      </div>
+
       <ul className="flex gap-8 max-md:hidden">
         {navbarData.map((category) => (
           <li key={category.id}>
@@ -69,15 +70,15 @@ const Navbar = ({ darkMode }) => {
       </div>
       <div
         ref={sideBarRef}
-        className="md:hidden absolute right-0 translate-x-[125%] top-0 h-full w-[250px] dark:bg-black bg-gray-100 p-6 z-10 transition-transform duration-500 ease-out"
+        className="md:hidden absolute right-0 translate-x-[125%] top-0 h-screen w-[250px] dark:bg-black bg-gray-100 p-6 z-10 transition-transform duration-500 ease-out"
       >
-        <IconButton>
-          <MenuIcon
-            onClick={() => {
-              sideBarRef.current.style.transform = 'translateX(125%)'
-            }}
-            color={`${darkMode ? 'black' : 'white'}`}
-          />
+        <IconButton
+          onClick={() => {
+            sideBarRef.current.style.transform = 'translateX(125%)'
+            document.body.style.overflow = 'scroll'
+          }}
+        >
+          <MenuIcon color={`${darkMode ? 'black' : 'white'}`} />
         </IconButton>
         <ul className="flex flex-col gap-7 py-5">
           {navbarData.map((category) => (
@@ -91,9 +92,14 @@ const Navbar = ({ darkMode }) => {
         </ul>
       </div>
       <div className="flex gap-10 md:justify-around items-center md:pr-6 max-md:gap-2 max-md:justify-end">
-        <span className="md:hidden">
-          <IconButton>
-            <Search color={`${darkMode ? 'black' : 'white'}`} />
+        <span className={`md:hidden ${showFullWidthSearch && 'hidden'} `}>
+          <IconButton
+            onClick={() => {
+              // console.log(showFullWidthSearch)
+              setShowFullWidthSearch(true)
+            }}
+          >
+            <Search color={`${darkMode ? 'black' : 'white'} `} />
           </IconButton>
         </span>
 
@@ -125,13 +131,16 @@ const Navbar = ({ darkMode }) => {
           </a>
         </Tooltip>
         <span className="md:hidden">
-          <IconButton className="md:hidden">
+          <IconButton
+            className="md:hidden"
+            onClick={() => {
+              sideBarRef.current.style.transform = 'translateX(0)'
+              document.body.style.overflow = 'hidden'
+            }}
+          >
             <MenuIcon
               className="md:hidden"
               color={`${darkMode ? 'black' : 'white'}`}
-              onClick={() => {
-                sideBarRef.current.style.transform = 'translateX(0)'
-              }}
             />
           </IconButton>
         </span>
