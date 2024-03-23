@@ -12,13 +12,38 @@ import {
   User,
 } from 'lucide-react'
 import { IconButton, Menu, Tooltip } from '@mui/material'
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 const Navbar = ({ darkMode }) => {
-  const sideBarRef = useRef(null)
+  const [prevScrollPos, setPrevScrollPos] = useState(0)
+  const [visible, setVisible] = useState(true)
 
+  const handleScroll = () => {
+    const currentScrollPos = window.scrollY
+
+    if (currentScrollPos > prevScrollPos) {
+      setVisible(false)
+    } else {
+      setVisible(true)
+    }
+
+    setPrevScrollPos(currentScrollPos)
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  })
+
+  const sideBarRef = useRef(null)
+  const [showFullWidthSearch, setShowFullWidthSearch] = useState('false')
   return (
-    <nav className="flex justify-between items-center px-5 py-2 bg-gray-100 dark:bg-black dark:text-white text-black transition-all duration-500 ease-out font-poppins">
+    <nav
+      className={`flex sticky top-0 justify-between items-center px-5 py-2 bg-gray-100 dark:bg-black dark:text-white text-black transition-all duration-500 ease-out font-poppins ${
+        !visible && 'hidden'
+      }`}
+    >
       <img
         src={darkMode ? logoDark : logoLight}
         alt="logo-pic"
@@ -66,7 +91,12 @@ const Navbar = ({ darkMode }) => {
         </ul>
       </div>
       <div className="flex gap-10 md:justify-around items-center md:pr-6 max-md:gap-2 max-md:justify-end">
-        <Search className="md:hidden hover:cursor-pointer" />
+        <span className="md:hidden">
+          <IconButton>
+            <Search color={`${darkMode ? 'black' : 'white'}`} />
+          </IconButton>
+        </span>
+
         <Tooltip title="Profile">
           <a href="">
             <IconButton>

@@ -10,7 +10,6 @@ import Footer from '../sections/Footer'
 const Home = ({ darkMode, setDarkMode }) => {
   return (
     <div>
-      <Navbar darkMode={darkMode} />
       <Carousel />
       <Featured />
       <MensTrending />
