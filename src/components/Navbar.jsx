@@ -15,9 +15,9 @@ import { IconButton, Tooltip } from '@mui/material'
 const Navbar = ({ darkMode }) => {
   return (
     <div>
-      <nav className="flex justify-between items-center px-5 py-5 bg-gray-100 dark:bg-slate-500 dark:text-white text-black ">
+      <nav className="flex justify-between items-center px-5 py-2 bg-gray-50 dark:bg-black dark:text-white text-black ">
         <img
-          src={darkMode ? logoLight : logoDark}
+          src={darkMode ? logoDark : logoLight}
           alt="logo-pic"
           className="h-[50px] w-[50px]"
         />
@@ -35,32 +35,38 @@ const Navbar = ({ darkMode }) => {
               placeholder="Search for clothing"
             />
             <button type="submit" onClick={(e) => e.preventDefault()}>
-              <Search className={`${darkMode ? 'text-white' : 'text-black'}`} />
+              <Search className={` dark:text-white text-black`} />
             </button>
           </form>
         </div>
         <div className="flex gap-10 justify-around items-center pr-6">
           <Tooltip title="Profile">
             <a href="">
-              <IconButton
-              >
-                <User radius={'100%'} />
+              <IconButton>
+                <User
+                  radius={'100%'}
+                  color={`${darkMode ? 'black' : 'white'}`}
+                />
               </IconButton>
             </a>
           </Tooltip>
           <Tooltip title="Wishlist">
             <a href="">
-              <IconButton
-              >
-                <Heart radius={'100%'} />
+              <IconButton>
+                <Heart
+                  radius={'100%'}
+                  color={`${darkMode ? 'black' : 'white'}`}
+                />
               </IconButton>
             </a>
           </Tooltip>
           <Tooltip title="Cart">
             <a href="">
-              <IconButton
-              >
-                <LucideShoppingBag radius={'100%'} />
+              <IconButton>
+                <LucideShoppingBag
+                  radius={'100%'}
+                  color={`${darkMode ? 'black' : 'white'}`}
+                />
               </IconButton>
             </a>
           </Tooltip>
