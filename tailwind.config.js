@@ -1,17 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       fontFamily: {
         'istok-web': ['Istok Web', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
       },
     },
   },
   plugins: [],
-  darkMode:'selector'
+  darkMode: 'selector',
 }
-
