@@ -8,7 +8,7 @@ import Footer from '../sections/Footer'
 
 const Home = () => {
   return (
-    <div className="mt-16">
+    <div className="">
       <Carousel />
       <Featured />
       <MensTrending />

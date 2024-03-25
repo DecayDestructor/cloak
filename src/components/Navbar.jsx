@@ -20,7 +20,7 @@ const Navbar = ({ darkMode }) => {
   const { width } = useWindowDimensions()
   return (
     <nav
-      className={`flex  w-full justify-between items-center px-5 py-2 bg-gray-100 dark:bg-black dark:text-white text-black transition-all duration-500 ease-out font-poppins`}
+      className={`flex  w-full justify-between items-center px-5 py-2 lg:text-base md:text-sm sm:text-xs bg-gray-100 dark:bg-black dark:text-white text-black transition-all duration-500 ease-out font-poppins`}
     >
       <img
         src={darkMode ? logoDark : logoLight}
@@ -32,7 +32,7 @@ const Navbar = ({ darkMode }) => {
 
       <div
         className={`rounded-md p-2 flex items-center justify-between gap-2 bg-transparent ${
-          !showFullWidthSearch && 'hidden'
+          width > 768 ? 'hidden' : !showFullWidthSearch ? 'hidden' : 'false'
         }`}
       >
         <span className={`md:hidden ${!showFullWidthSearch && 'hidden'}`}>
@@ -43,24 +43,27 @@ const Navbar = ({ darkMode }) => {
           >
             <ArrowLeftIcon
               color={`${darkMode ? 'black' : 'white'}`}
-              size={18}
+              size={20}
             />
           </IconButton>
         </span>
-        <form className="flex items-center bg-transparent gap-3 justify-center">
+        <form className="flex items-center bg-transparent gap-1  justify-center">
           <input
             className={`outline-none px-3 bg-transparent dark:placeholder-white placeholder-black text-sm`}
             placeholder="Search for clothing"
           />
           <button type="submit" onClick={(e) => e.preventDefault()}>
-            <Search size={18} />
+            <Search size={20} />
           </button>
         </form>
       </div>
 
-      <ul className="flex gap-8 max-md:hidden">
+      <ul className="flex lg:gap-10 md:gap-6 max-md:hidden">
         {navbarData.map((category) => (
-          <li key={category.id}>
+          <li
+            key={category.id}
+            className={`relative before:h-[2px] before:bottom-[-5px] before:w-0 before:absolute  before:content-[''] dark:before:bg-white before:bg-black hover:before:w-full before:transition-all before:duration-300 before:ease-out`}
+          >
             <a href="">{category.name}</a>
           </li>
         ))}
@@ -113,7 +116,10 @@ const Navbar = ({ darkMode }) => {
               setShowFullWidthSearch(true)
             }}
           >
-            <Search color={`${darkMode ? 'black' : 'white'} `} />
+            <Search
+              color={`${darkMode ? 'black' : 'white'} `}
+              size={width < 768 ? 20 : 24}
+            />
           </IconButton>
         </span>
         <span className={``}>
@@ -123,6 +129,7 @@ const Navbar = ({ darkMode }) => {
                 <User
                   radius={'100%'}
                   color={`${darkMode ? 'black' : 'white'}`}
+                  size={width < 768 ? 20 : 24}
                 />
               </IconButton>
             </a>
@@ -135,6 +142,7 @@ const Navbar = ({ darkMode }) => {
                 <Heart
                   radius={'100%'}
                   color={`${darkMode ? 'black' : 'white'}`}
+                  size={width < 768 ? 20 : 24}
                 />
               </IconButton>
             </a>
@@ -147,14 +155,15 @@ const Navbar = ({ darkMode }) => {
                 <LucideShoppingBag
                   radius={'100%'}
                   color={`${darkMode ? 'black' : 'white'}`}
+                  size={width < 768 ? 20 : 24}
                 />
               </IconButton>
             </a>
           </Tooltip>
         </span>
-        <span className={``}>
+        <span className={`md:hidden`}>
           <IconButton
-            className="md:hidden"
+            className=""
             onClick={() => {
               sideBarRef.current.style.transform = 'translateX(0)'
               document.body.style.overflow = 'hidden'
@@ -163,6 +172,7 @@ const Navbar = ({ darkMode }) => {
             <MenuIcon
               className="md:hidden"
               color={`${darkMode ? 'black' : 'white'}`}
+              size={20}
             />
           </IconButton>
         </span>
