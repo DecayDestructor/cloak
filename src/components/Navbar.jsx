@@ -10,10 +10,9 @@ import {
   Search,
   User,
 } from 'lucide-react'
-import { IconButton, Tooltip } from '@mui/material'
+import { Tooltip } from '@nextui-org/react'
 import { useRef, useState } from 'react'
 import useWindowDimensions from '../hooks/useWindowDimensions'
-
 const Navbar = ({ darkMode }) => {
   const sideBarRef = useRef(null)
   const [showFullWidthSearch, setShowFullWidthSearch] = useState(false)
@@ -31,25 +30,23 @@ const Navbar = ({ darkMode }) => {
       />
 
       <div
-        className={`rounded-md p-2 flex items-center justify-between gap-2 bg-transparent ${
+        className={`rounded-md p-2 flex items-center justify-evenly bg-transparent w-full gap-2 ${
           width > 768 ? 'hidden' : !showFullWidthSearch ? 'hidden' : 'false'
         }`}
       >
         <span className={`md:hidden ${!showFullWidthSearch && 'hidden'}`}>
-          <IconButton
+          <ArrowLeftIcon
+            color={`${darkMode ? 'black' : 'white'}`}
+            size={24}
             onClick={() => {
               setShowFullWidthSearch(false)
             }}
-          >
-            <ArrowLeftIcon
-              color={`${darkMode ? 'black' : 'white'}`}
-              size={20}
-            />
-          </IconButton>
+            className="rounded-full hover:bg-gray-300 p-1 dark:hover:bg-gray-800 transition-background duration-300"
+          />
         </span>
-        <form className="flex items-center bg-transparent gap-1  justify-center">
+        <form className="flex items-center bg-transparent gap-1 justify-between w-full">
           <input
-            className={`outline-none px-3 bg-transparent dark:placeholder-white placeholder-black text-sm`}
+            className={`outline-none px-3 bg-transparent dark:placeholder-white placeholder-black text-sm grow`}
             placeholder="Search for clothing"
           />
           <button type="submit" onClick={(e) => e.preventDefault()}>
@@ -83,14 +80,13 @@ const Navbar = ({ darkMode }) => {
         ref={sideBarRef}
         className="md:hidden absolute right-0 translate-x-[125%] top-0 h-screen w-[250px] dark:bg-black bg-gray-100 p-6 z-10 transition-transform duration-500 ease-out"
       >
-        <IconButton
+        <MenuIcon
+          color={`${darkMode ? 'black' : 'white'}`}
           onClick={() => {
             sideBarRef.current.style.transform = 'translateX(125%)'
             document.body.style.overflow = 'scroll'
           }}
-        >
-          <MenuIcon color={`${darkMode ? 'black' : 'white'}`} />
-        </IconButton>
+        />
         <ul className="flex flex-col gap-7 py-5">
           {navbarData.map((category) => (
             <li
@@ -103,78 +99,65 @@ const Navbar = ({ darkMode }) => {
         </ul>
       </div>
       <div
-        className={`flex gap-10 md:justify-around items-center md:pr-6 max-md:gap-2 max-md:justify-end ${
+        className={`flex lg:gap-8 md:gap-4 md:justify-around items-center md:pr-6 max-md:gap-2 max-md:justify-end ${
           width < 768 && showFullWidthSearch && 'hidden'
         }`}
       >
         <span
           className={` ${(width > 768 || showFullWidthSearch) && 'hidden'} `}
         >
-          <IconButton
+          <Search
+            color={`${darkMode ? 'black' : 'white'} `}
+            size={width < 768 ? 20 : width < 1024 ? 22 : 24}
             onClick={() => {
               // console.log(showFullWidthSearch)
               setShowFullWidthSearch(true)
             }}
-          >
-            <Search
-              color={`${darkMode ? 'black' : 'white'} `}
-              size={width < 768 ? 20 : 24}
-            />
-          </IconButton>
+          />
         </span>
         <span className={``}>
-          <Tooltip title="Profile">
+          <Tooltip content="Profile">
             <a href="">
-              <IconButton>
-                <User
-                  radius={'100%'}
-                  color={`${darkMode ? 'black' : 'white'}`}
-                  size={width < 768 ? 20 : 24}
-                />
-              </IconButton>
+              <User
+                radius={'100%'}
+                color={`${darkMode ? 'black' : 'white'}`}
+                size={width < 768 ? 20 : width < 1024 ? 22 : 24}
+              />
             </a>
           </Tooltip>
         </span>
         <span className={``}>
-          <Tooltip title="Wishlist">
+          <Tooltip content="Wishlist">
             <a href="">
-              <IconButton>
-                <Heart
-                  radius={'100%'}
-                  color={`${darkMode ? 'black' : 'white'}`}
-                  size={width < 768 ? 20 : 24}
-                />
-              </IconButton>
+              <Heart
+                radius={'100%'}
+                color={`${darkMode ? 'black' : 'white'}`}
+                size={width < 768 ? 20 : width < 1024 ? 22 : 24}
+              />
             </a>
           </Tooltip>
         </span>
         <span className={``}>
-          <Tooltip title="Cart">
+          <Tooltip content="Cart">
             <a href="">
-              <IconButton>
-                <LucideShoppingBag
-                  radius={'100%'}
-                  color={`${darkMode ? 'black' : 'white'}`}
-                  size={width < 768 ? 20 : 24}
-                />
-              </IconButton>
+              <LucideShoppingBag
+                radius={'100%'}
+                color={`${darkMode ? 'black' : 'white'}`}
+                size={width < 768 ? 20 : width < 1024 ? 22 : 24}
+              />
             </a>
           </Tooltip>
         </span>
         <span className={`md:hidden`}>
-          <IconButton
-            className=""
+          <MenuIcon
+            className="md:hidden"
+            color={`${darkMode ? 'black' : 'white'}`}
+            size={20}
             onClick={() => {
               sideBarRef.current.style.transform = 'translateX(0)'
               document.body.style.overflow = 'hidden'
             }}
-          >
-            <MenuIcon
-              className="md:hidden"
-              color={`${darkMode ? 'black' : 'white'}`}
-              size={20}
-            />
-          </IconButton>
+          />
         </span>
       </div>
     </nav>
