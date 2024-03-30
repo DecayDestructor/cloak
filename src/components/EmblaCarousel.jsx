@@ -9,17 +9,6 @@ import {
 import axios, { Axios } from 'axios'
 
 const EmblaCarousel = (props) => {
-  const [carouselPics, setCarouselPics] = useState({})
-
-  useEffect(() => {
-    const response = axios
-      .get('https://fakestoreapi.com/products?limit=5')
-      .then((response) => {
-        // console.log(response.data)
-        setCarouselPics({ ...carouselPics, ...response.data })
-        console.log(carouselPics)
-      })
-  }, [])
   const { slides, options } = props
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [
     Autoplay({
@@ -69,9 +58,10 @@ const EmblaCarousel = (props) => {
     <div className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {slides.map((index) => (
+          {slides.map((slide, index) => (
             <div className="embla__slide" key={index}>
-              <img src={carouselPics[index].image} alt="" />
+              <img src={slide[0].image} alt="gugugaga" />
+              {console.log(slide)}
             </div>
           ))}
         </div>
