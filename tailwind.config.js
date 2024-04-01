@@ -13,6 +13,8 @@ export default {
       fontFamily: {
         'istok-web': ['Istok Web', 'sans-serif'],
         poppins: ['Poppins', 'sans-serif'],
+        'noto-sans': ['Noto Sans', 'sans-serif'],
+        'bebas-neue': ['Bebas Neue', 'sans-serif'],
       },
     },
   },
