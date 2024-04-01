@@ -15,6 +15,7 @@ export default {
         poppins: ['Poppins', 'sans-serif'],
         'noto-sans': ['Noto Sans', 'sans-serif'],
         'bebas-neue': ['Bebas Neue', 'sans-serif'],
+        'open-sans': ['Open Sans', 'sans-serif'],
       },
     },
   },
