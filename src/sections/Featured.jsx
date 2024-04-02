@@ -5,6 +5,7 @@ import React from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import { featuredData } from '../data/featured'
 const Featured = () => {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
@@ -15,6 +16,7 @@ const Featured = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
     initialSlide: 0,
+    swipeToSlide: true,
     responsive: [
       {
         breakpoint: 1024,
@@ -70,14 +72,18 @@ const Featured = () => {
         <ArrowRight />
       </button>
       {!isLoading ? (
-        <Slider {...settings} className="w-3/4">
-          <Card src="" title="Shoes" price={300} />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+        <Slider {...settings} className="w-[90%] py-5 mt-10">
+          {featuredData.map((item) => {
+            return (
+              <Card
+                key={item.id}
+                src={item.src}
+                title={item.name}
+                price={item.price}
+                category={item.category}
+              />
+            )
+          })}
         </Slider>
       ) : (
         <h1>Loading</h1>
@@ -86,12 +92,17 @@ const Featured = () => {
   )
 }
 export const Card = (props) => {
-  const { src, title, price } = props
+  const { src, title, price, category } = props
   return (
-    <div className="flex flex-col">
-      <img src={src} alt="pic"></img>
-      <div className="">
-        <h3>{title}</h3>
+    <div className="flex flex-col items-center dark:bg-white bg-black dark:text-black text-white font-poppins pt-4 pb-10 mx-7 rounded-none shadow-lg">
+      <img
+        src={src}
+        alt="pic"
+        className={` h-3/6 aspect-square before:dark:bg-black before:dark:text-white before:bg-white before:text-black`}
+      ></img>
+      <div className=" py-5">
+        <h3 className="lg:text-lg md:text-medium max-md:text-sm">{title}</h3>
+        <span>{category}</span>
         <h5>{price}</h5>
       </div>
     </div>
