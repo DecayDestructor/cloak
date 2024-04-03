@@ -17,9 +17,9 @@ const Home = () => {
     <div className="">
       <Carousel />
       <Featured />
+      <Essentials />
       <MensTrending />
       <WomenTrending />
-      <Essentials />
       <Footer />
     </div>
   )
