@@ -1,14 +1,11 @@
 import axios from 'axios'
-import { ArrowRight, ArrowRightCircle } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import React from 'react'
+import { ArrowRight } from 'lucide-react'
+
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { featuredData } from '../data/featured'
 const Featured = () => {
-  const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
   var settings = {
     dots: true,
     infinite: true,
@@ -44,22 +41,6 @@ const Featured = () => {
       },
     ],
   }
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          'https://fakestoreapi.com/products?limit=5'
-        )
-        setData(response.data)
-        setIsLoading(false)
-        console.log(response.data) // Moved logging here
-      } catch (error) {
-        console.error('Error fetching data:', error)
-      }
-    }
-
-    fetchData()
-  }, [])
   return (
     <div className="md:my-28 max-md:my-16 flex flex-col items-center gap-3">
       <span className="font-istok-web">upstyle yourself</span>
@@ -71,24 +52,21 @@ const Featured = () => {
         <span> Shop Now</span>
         <ArrowRight />
       </button>
-      {!isLoading ? (
-        <Slider {...settings} className="w-[90%] py-5 mt-10">
-          {featuredData.map((item) => {
-            return (
-              <Card
-                key={item.id}
-                src={item.src}
-                title={item.name}
-                price={item.price}
-                category={item.category}
-                mrpPrice={item.mrpPrice}
-              />
-            )
-          })}
-        </Slider>
-      ) : (
-        <h1>Loading</h1>
-      )}
+
+      <Slider {...settings} className="w-[90%] py-5 mt-10">
+        {featuredData.map((item) => {
+          return (
+            <Card
+              key={item.id}
+              src={item.src}
+              title={item.name}
+              price={item.price}
+              category={item.category}
+              mrpPrice={item.mrpPrice}
+            />
+          )
+        })}
+      </Slider>
     </div>
   )
 }
