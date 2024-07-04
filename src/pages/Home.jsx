@@ -2,7 +2,7 @@
 import Carousel from '../sections/Carousel'
 import Featured from '../sections/Featured'
 import MensTrending from '../sections/MenTrending'
-import WomenTrending from '../sections/WomenTrending'
+// import WomenTrending from '../sections/WomenTrending'
 import Essentials from '../sections/Essentials'
 import Footer from '../sections/Footer'
 
@@ -19,7 +19,7 @@ const Home = () => {
       <Featured />
       <Essentials />
       <MensTrending />
-      <WomenTrending />
+      {/* <WomenTrending /> */}
       <Footer />
     </div>
   )
